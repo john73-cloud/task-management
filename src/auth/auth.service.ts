@@ -9,11 +9,11 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login(loginDto: LoginDto) {
     const user = await this.usersService.findByEmail(loginDto.email);
-    
+
     if (!user || !await bcrypt.compare(loginDto.password, user.password)) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -31,10 +31,7 @@ export class AuthService {
     };
   }
 
-  async logout(): Promise<{ message: string }> {
-    // For stateless JWT, logout is primarily a client-side action (deleting the token).
-    // Server can acknowledge. If a token blocklist (e.g., Redis) were used,
-    // the token would be added to it here.
+  logout(): { message: string } {
     return { message: 'Successfully logged out' };
   }
 }

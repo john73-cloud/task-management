@@ -16,7 +16,7 @@ import { TaskPriority } from '../common/enums/task-priority.enum';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class TasksController {
-  constructor(private readonly tasksService: TasksService) {}
+  constructor(private readonly tasksService: TasksService) { }
 
   @Post()
   @ApiOperation({ summary: 'Create task' })
@@ -77,7 +77,7 @@ export class TasksController {
   @Delete(':id')
   @ApiOperation({ summary: 'Delete task' })
   @ApiParam({ name: 'id', type: 'string', format: 'uuid', description: 'Task ID' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Task deleted successfully.' }) // Or HttpStatus.NO_CONTENT if nothing is returned
+  @ApiResponse({ status: HttpStatus.OK, description: 'Task deleted successfully.' })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized.' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden - User cannot delete this task.' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Task not found.' })

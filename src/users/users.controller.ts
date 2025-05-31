@@ -14,7 +14,7 @@ import { User } from './entities/user.entity';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
   @Roles(UserRole.ADMIN)
@@ -49,7 +49,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @Roles(UserRole.ADMIN) 
+  @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Update user (Admin only or self)' })
   @ApiParam({ name: 'id', type: 'string', format: 'uuid', description: 'User ID' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User updated successfully.', type: User })
@@ -65,9 +65,7 @@ export class UsersController {
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Delete user (Admin only)' })
   @ApiParam({ name: 'id', type: 'string', format: 'uuid', description: 'User ID' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User deleted successfully.' }) // Assuming it returns a confirmation/object
-  // If your remove service method is void or returns no content, use 204:
-  // @ApiResponse({ status: HttpStatus.NO_CONTENT, description: 'User deleted successfully (No Content).' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User deleted successfully.' })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized.' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden - Admin access required.' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found.' })

@@ -25,7 +25,7 @@ export class User {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
 
-  @Column() // No ApiProperty for password
+  @Column()
   password: string;
 
   @ApiProperty({ description: 'Indicates if the user account is active', example: true })
